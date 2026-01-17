@@ -1,0 +1,38 @@
+generator client {
+ provider = "prisma-client-js"
+ output = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Palette {
+  id        String   @id @default(cuid())
+  name      String
+  isPublic  Boolean  @default(false)
+  colors    Color[]
+  likes     Like[]   // 👈 this line is required
+  createdAt DateTime @default(now())
+}
+
+
+model Color {
+  id        String   @id @default(cuid())
+  name      String
+  hex       String
+  palette   Palette @relation(fields: [paletteId], references: [id], onDelete: Cascade)
+  paletteId String
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  palette   Palette  @relation(fields: [paletteId], references: [id], onDelete: Cascade)
+  paletteId String
+  createdAt DateTime @default(now())
+
+  @@unique([paletteId])
+}
+
+
+

@@ -12,4 +12,27 @@ body {
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
+
+  .palette-card {
+  background: #0b1220; /* solid, not rgba */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+
+  /* ONE shadow only */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+
+  transition: transform 0.15s ease, border-color 0.15s ease;
+  padding-left: 20px;
+}
+
+.palette-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(79, 140, 255, 0.6);
+}
+
+.palette-card::before,
+.palette-card::after {
+  display: none !important;
+}
+
 }
